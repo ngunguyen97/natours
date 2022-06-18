@@ -49,7 +49,7 @@ exports.createTour = async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(201).json({
+    res.status(404).json({
       status: 'fail',
       data: {
         tour: error
@@ -58,15 +58,27 @@ exports.createTour = async (req, res) => {
   }
 };
 
-exports.updateTour = (req, res) => {
-  const updatedTour = Object.assign({}, req.body);
+exports.updateTour = async (req, res) => {
+  try {
+    const updatedTour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      tour: updatedTour
-    }
-  });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        tour: updatedTour
+      }
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'fail',
+      data: {
+        tour: error
+      }
+    });
+  }
 };
 
 exports.deleteTour = (req, res) => {
