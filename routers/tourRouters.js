@@ -10,6 +10,8 @@ const router = express.Router();
 // If not, send back 400 (bad request)
 // Add it to the post hanlder stack.
 
+router.route('/statistics').get(tourController.getToursStatistics);
+
 router.get('/', tourController.getAllTours);
 router.get('/:id', tourController.getTour);
 router.post('/', tourController.createTour);
