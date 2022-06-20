@@ -11,6 +11,7 @@ const router = express.Router();
 // Add it to the post hanlder stack.
 
 router.route('/statistics').get(tourController.getToursStatistics);
+router.route('/monthly-plan/:year').get(tourController.getMonthlyPlan);
 
 router.get('/', tourController.getAllTours);
 router.get('/:id', tourController.getTour);
