@@ -123,9 +123,18 @@ tourSchema.pre('save', function(next) {
   next();
 });
 
+tourSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt'
+  });
+
+  next();
+});
+
 // QUERY MIDDLEWARE:
 tourSchema.pre(/^find/, function(next) {
-  this.find({ secretTour: { $ne: false } });
+  this.find({ secretTour: { $ne: true } });
   next();
 });
 
