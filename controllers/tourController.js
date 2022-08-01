@@ -2,12 +2,16 @@
 /* eslint-disable radix */
 
 const Tour = require('../models/tourModel');
-const APIFeatures = require('../utils/apiFeatures');
-const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handleFactory');
 
-exports.getAllTours = catchAsync(async (req, res, next) => {
+exports.getAllTours = factory.getAll(Tour);
+exports.getTour = factory.getOne(Tour, { path: 'reviews' });
+exports.createTour = factory.createOne(Tour);
+exports.updateTour = factory.updateOne(Tour);
+exports.deleteTour = factory.deleteOne(Tour);
+
+/* exports.getAllTours = catchAsync(async (req, res, next) => {
   // EXECUTE QUERY
   const features = new APIFeatures(Tour.find(), req.query)
     .filter()
@@ -22,8 +26,8 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
     results: tours.length,
     data: { tours }
   });
-});
-
+}); */
+/* 
 exports.getTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id).populate('reviews');
   if (!tour) {
@@ -35,9 +39,9 @@ exports.getTour = catchAsync(async (req, res, next) => {
     results: [tour].length,
     data: { tour }
   });
-});
+}); */
 
-exports.createTour = catchAsync(async (req, res, next) => {
+/* exports.createTour = catchAsync(async (req, res, next) => {
   const newTour = await Tour.create(req.body);
 
   res.status(201).json({
@@ -46,8 +50,9 @@ exports.createTour = catchAsync(async (req, res, next) => {
       tour: newTour
     }
   });
-});
+}); */
 
+/* 
 exports.updateTour = catchAsync(async (req, res, next) => {
   const updatedTour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -64,9 +69,7 @@ exports.updateTour = catchAsync(async (req, res, next) => {
       tour: updatedTour
     }
   });
-});
-
-exports.deleteTour = factory.deleteOne(Tour);
+}); */
 
 // exports.deleteTour = catchAsync(async (req, res, next) => {
 //   const tour = await Tour.findByIdAndDelete(req.params.id);
