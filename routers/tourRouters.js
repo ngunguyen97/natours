@@ -1,9 +1,23 @@
 const express = require('express');
 const tourController = require('./../controllers/tourController');
 const authController = require('./../controllers/authController');
-const reviewController = require('./../controllers/reviewController');
+const reviewRouter = require('./../routers/reviewRouters');
 
 const router = express.Router();
+
+/* POST /tour/234fa4d/review */
+/* GET /tour/234fa4d/review */
+/* GET /tour/234fa4d/reivew/94887fda */
+
+router.use('/:tourId/reviews', reviewRouter);
+
+// router
+//   .route('/:tourId/review')
+//   .post(
+//     authController.protect,
+//     authController.restrictTo('user'),
+//     reviewController.createReview
+//   );
 
 //router.param('id', tourController.checkID);
 
@@ -25,17 +39,5 @@ router.delete(
   authController.restrictTo('admin', 'lead-guide'),
   tourController.deleteTour
 );
-
-/* POST /tour/234fa4d/review */
-/* GET /tour/234fa4d/review */
-/* GET /tour/234fa4d/reivew/94887fda */
-
-router
-  .route('/:tourId/review')
-  .post(
-    authController.protect,
-    authController.restrictTo('user'),
-    reviewController.createReview
-  );
 
 module.exports = router;
