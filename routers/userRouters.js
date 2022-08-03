@@ -9,30 +9,25 @@ router.post('/login', authController.login);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
+router.use(authController.protect);
+
 router.patch(
   '/updatePassword',
-  authController.protect,
+
   authController.updatePassword
 );
 
 router.patch(
   '/updateCurrentUser',
-  authController.protect,
+
   userController.updateCurrentUser
 );
 
-router.delete(
-  '/deleteUser',
-  authController.protect,
-  userController.deleteCurrentUser
-);
+router.delete('/deleteUser', userController.deleteCurrentUser);
 
-router.get(
-  '/me',
-  authController.protect,
-  userController.getMe,
-  userController.getUser
-);
+router.get('/me', userController.getMe, userController.getUser);
+
+router.use(authController.restrictTo('admin'));
 
 router
   .route('/')

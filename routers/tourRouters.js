@@ -27,12 +27,28 @@ router.use('/:tourId/reviews', reviewRouter);
 // Add it to the post hanlder stack.
 
 router.route('/statistics').get(tourController.getToursStatistics);
-router.route('/monthly-plan/:year').get(tourController.getMonthlyPlan);
+router
+  .route('/monthly-plan/:year')
+  .get(
+    authController.protect,
+    authController.restrictTo('admin', 'lead-guide'),
+    tourController.getMonthlyPlan
+  );
 
-router.get('/', authController.protect, tourController.getAllTours);
+router.get('/', tourController.getAllTours);
 router.get('/:id', tourController.getTour);
-router.post('/', tourController.createTour);
-router.patch('/:id', tourController.updateTour);
+router.post(
+  '/',
+  authController.protect,
+  authController.restrictTo('admin'),
+  tourController.createTour
+);
+router.patch(
+  '/:id',
+  authController.protect,
+  authController.restrictTo('admin', 'lead-guide'),
+  tourController.updateTour
+);
 router.delete(
   '/:id',
   authController.protect,

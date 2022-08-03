@@ -13,7 +13,7 @@ exports.deleteOne = Model =>
     res.status(204).json({
       status: 'success',
       data: {
-        tour: null
+        doc: null
       }
     });
   });
