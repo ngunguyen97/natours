@@ -10,6 +10,7 @@ const hpp = require('hpp');
 const tourRouters = require('./routers/tourRouters');
 const userRouters = require('./routers/userRouters');
 const reviewRouters = require('./routers/reviewRouters');
+const viewRouters = require('./routers/viewRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -61,27 +62,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.status(200).render('base', {
-    title: 'The Forest Hiker'
-  });
-});
-
-app.get('/overview', (req, res) => {
-  res.status(200).render('overview', {
-    title: 'All tour'
-  });
-});
-
-app.get('/tour', (req, res) => {
-  res.status(200).render('tour', {
-    title: 'The Forest Hiker Tour'
-  });
-});
-
 app.use('/api/v1/tours', tourRouters);
 app.use('/api/v1/users', userRouters);
 app.use('/api/v1/reviews', reviewRouters);
+app.use('/', viewRouters);
 
 app.all('*', (req, res, next) => {
   // const err = new Error(`Can't find ${req.originalUrl} on this server!`);
