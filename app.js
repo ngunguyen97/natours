@@ -21,7 +21,12 @@ app.set('views', path.join(__dirname, 'views'));
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false
+  })
+);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

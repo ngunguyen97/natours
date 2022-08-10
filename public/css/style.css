@@ -550,7 +550,9 @@ body {
   bottom: 0;
   width: 100%;
 }
-
+.leaflet-popup-content {
+  font-size: 13px !important;
+}
 .marker {
   background-image: url('../img/pin.png');
   background-size: cover;
