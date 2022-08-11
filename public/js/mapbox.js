@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 const locations = JSON.parse(document.getElementById('map').dataset.locations);
-console.log(locations);
 //var map = L.map('map').setView([34.111745, -118.113491], 5);
 
 var map = L.map('map', {
@@ -35,7 +34,6 @@ var myIcon = L.icon({
 var bounds = new L.latLngBounds();
 
 locations.forEach(loc => {
-  console.log(loc.coordinates);
   L.marker(loc.coordinates.reverse(), {
     icon: myIcon
   })
