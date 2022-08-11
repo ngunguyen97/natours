@@ -24,6 +24,10 @@ exports.getTour = catchAsync(async (req, res) => {
 });
 
 exports.getLoginForm = (req, res) => {
+  if (res.locals.user) {
+    res.redirect('/');
+  }
+
   res.status(200).render('login', {
     title: 'Log into your account'
   });
