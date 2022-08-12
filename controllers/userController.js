@@ -35,7 +35,7 @@ exports.deleteUser = factory.deleteOne(User);
   });
 }); */
 
-exports.updateCurrentUser = async (req, res, next) => {
+exports.updateCurrentUser = catchAsync(async (req, res, next) => {
   // 1) Create an error if user posted password data.
   if (req.body.password || req.body.passwordConfirm) {
     return next(
@@ -59,7 +59,7 @@ exports.updateCurrentUser = async (req, res, next) => {
       user: updateUser
     }
   });
-};
+});
 
 exports.deleteCurrentUser = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
