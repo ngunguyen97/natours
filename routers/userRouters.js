@@ -1,4 +1,5 @@
 const express = require('express');
+
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
 
@@ -20,7 +21,7 @@ router.patch(
 
 router.patch(
   '/updateCurrentUser',
-
+  userController.uploadUserPhoto,
   userController.updateCurrentUser
 );
 
