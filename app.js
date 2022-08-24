@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const tourRouters = require('./routers/tourRouters');
 const userRouters = require('./routers/userRouters');
@@ -23,6 +24,8 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
+
+app.use(cors());
 
 app.use(
   helmet({
