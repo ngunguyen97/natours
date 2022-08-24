@@ -14,6 +14,7 @@ const tourRouters = require('./routers/tourRouters');
 const userRouters = require('./routers/userRouters');
 const reviewRouters = require('./routers/reviewRouters');
 const bookingRouters = require('./routers/bookingRouters');
+const bookingController = require('./controllers/bookingController');
 const viewRouters = require('./routers/viewRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -45,6 +46,12 @@ const limiter = rateLimit({
 });
 
 app.use('/api', limiter);
+
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
+);
 
 app.use(express.json());
 app.use(cookieParser());
