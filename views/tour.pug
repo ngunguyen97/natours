@@ -3,6 +3,8 @@ include _reviewCard
 
 block append head
   link(rel='stylesheet', href='/css/leaflet.css')
+  link(rel="stylesheet", href="/css/glide.core.min.css")
+  script(src="https://cdn.jsdelivr.net/npm/@glidejs/glide") 
   script(src='https://js.stripe.com/v3/') 
   script(src='/js/leaflet.js')   
   
@@ -76,8 +78,21 @@ block content
 
   section.section-reviews
     .reviews
-      each review in tour.reviews 
-        +reviewCard(review)
+      .glide.mlx-30
+        .glide__track(data-glide-el='track')
+          ul.glide__slides
+            each review in tour.reviews
+              li.glide__slide
+                +reviewCard(review)
+        .glide__arrows(data-glide-el='controls')
+          button.glide__arrow.glide__arrow--left(data-glide-dir='<')
+            svg.reviews__star.glide__arrows--active
+              use(xlink:href='/img/icons.svg#icon-arrow-left')
+          button.glide__arrow.glide__arrow--right(data-glide-dir='>')
+            svg.reviews__star.glide__arrows--default
+              use(xlink:href='/img/icons.svg#icon-arrow-right')
+      //- each review in tour.reviews 
+      //-   +reviewCard(review)
 
   section.section-cta
     .cta
@@ -96,3 +111,4 @@ block content
 
 block footer 
   script(src='/js/mapbox.js')
+  script(src='/js/glide.js')
